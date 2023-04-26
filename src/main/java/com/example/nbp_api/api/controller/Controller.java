@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
     @GetMapping("/AvgExchange")
-    public double AvgExchange(@RequestParam String date, @RequestParam String currencyCode){
+    public String AvgExchange(@RequestParam String date, @RequestParam String currencyCode){
 
-        return Service.AvgExchange(currencyCode, date);
-
+        try {
+            return Service.AvgExchange(currencyCode, date);
+        }
+        catch(Exception e) {
+            return e.toString();
+        }
     }
 
     @GetMapping("/MinMax")

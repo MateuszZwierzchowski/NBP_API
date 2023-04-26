@@ -8,9 +8,10 @@ import static java.lang.Math.abs;
 
 public class Service {
 
-    static public double AvgExchange(String code, String date){
+    static public String AvgExchange(String code, String date){
+        double exchange = Double.parseDouble(new JSONObject(NbpApi.GetFromURl("https://api.nbp.pl/api/exchangerates/rates/A/" + code + "/" + date + "/")).getJSONArray("rates").getJSONObject(0).get("mid").toString());
+        return "{\"exchange\":" + exchange + "}";
 
-        return Double.parseDouble(new JSONObject(NbpApi.GetFromURl("https://api.nbp.pl/api/exchangerates/rates/A/"+code+"/"+date+"/")).getJSONArray("rates").getJSONObject(0).get("mid").toString());
     }
 
     static public String MinMax(String code, int n){
